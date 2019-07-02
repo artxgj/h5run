@@ -1,0 +1,140 @@
+.edgetoedge li a .time {
+	color: blue;
+	font-size: 14px;
+	margin-top : 5px 10px 0px 0px;
+	vertical-align : bottom;
+	float : right;
+}
+
+.edgetoedge li a .duration {
+            color: #999;
+            font-size: 0.75em;
+            font-weight: normal;
+            display : inline;
+            margin-right: 0.75em;
+        }
+        
+.edgetoedge li a .distance {
+            display: block;
+	        color: #000;
+            font-size: .85em;
+            font-weight: normal;
+}
+
+
+.edgetoedge li a .preview, .edgetoedge li a .subject {
+	margin : 0 0 0 35px;
+    display: block;
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.edgetoedge li a .subject {
+    color: #000;
+    font-size: 14px;
+}
+
+/*
+.edgetoedge li a .preview, .edgetoedge li a .subject {
+    margin : 0 0 0 2.85em;
+    display: block;
+    color: #999;
+    font-size: 0.75em;
+    font-weight: normal;
+}
+
+.edgetoedge li a .subject {
+    margin : 0 0 0 2.5em; 
+    color : #000;
+    font-size : 0.85em;
+}
+*/
+
+
+#map_canvas {
+	height : 240px;
+	width :100%;
+}
+
+
+.individual li span.scalar {
+    color : #666;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+	font-size : 1.3em;
+	font-weight : normal;
+}
+
+
+.individual li span.unit {
+	font-size: 1em;
+	font-weight: normal;
+	color : #666;
+}
+
+.heading {
+    font-size : 1.40em;
+    font-weight: bold;
+    margin-right :0.50em;
+}
+
+.value {
+    font-size : 1.40em;
+    font-weight: normal;
+}
+
+li span.heading {
+    font-size : 0.60em;
+    font-weight: bold;
+    margin : 0.1em;
+    width : 40%;
+    float : left;
+}
+
+li span.value {
+    font-size : 0.65em;
+    font-weight: normal;
+    margin : 0.1em;
+    width : 60%;
+    float : none;
+}
+
+
+#jqt ul li a input[type="checkbox"] {
+	
+    margin: 5px 15px 5px 0px;
+}
+
+
+/* copied from floaty example */
+div#jqt .floaty {
+    -webkit-border-radius: 8px;
+    -webkit-box-shadow: rgba(0,0,0, .5) 0px 1px 1px;
+    width: 90%;
+    margin: 0 15%;
+    padding: 5px 20px;
+    background: rgba(255,255,255,.7);
+    color: #000;
+}
+
+
+#jqt ul.edgetoedge li.split {
+	font-size: 14px;
+}
+
+
+#jqt .chronoButton {
+    display: block;
+    border-width: 0 12px;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: inherit;
+    color: inherit;
+    -webkit-border-image: url(themes/apple/img/whiteButton.png) 0 12 0 12;
+    text-shadow: rgba(255, 255, 255, 0.7) 0 1px 0;
+    margin: 5px 10px;
+    width:95%;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html manifest="h5runv1.manifest">
+    <head>
+        <title>h5Run</title>
+        <meta charset="utf-8" />
+        <meta name = "format-detection" content = "telephone=no">
+        <link rel="stylesheet" href="css/jqtouch.css" />
+        <link rel="stylesheet" href="css/themes/apple/theme.css" />
+        <link rel="stylesheet" href="css/artxgj.h5run.css" />
+        <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script src="js/jqtouch.js"></script>
+        <script src="js/artxgj.db.js"></script>
+        <script src="js/artxgj.h5rundb.js"></script>
+        <script src="js/artxgj.h5run.js"></script>
+        <script src="js/jqt.floaty.js"></script>
+        <script src="js/json2.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    </head>
+    <body>
+    	<script>
+            (function() {
+                var html5Features = !!window.openDatabase && !!window.localStorage && !!navigator.geolocation && !!window.applicationCache;
+                if (!html5Features) {
+                    $('body').append("Your smartphone's browser doesn't support features needed by h5Run.")
+                             .css("background-color", "white");
+                    if(window.stop !== undefined) {
+                        window.stop();
+					}
+					else if(document.execCommand !== undefined) {
+                        document.execCommand("Stop", false);
+                    }
+                }
+                $.jQTouch({statusBar: 'black'});
+            })();
+    	</script>
+        <div id='jqt'>
+            <div id="home" class="current">
+                <div class="toolbar">
+                    <h1>h5Run</h1>
+                    <a href="#about" class="button rightButton flip">About</a>
+                </div>
+                <ul class="rounded">
+                    <li class="arrow"><a href="#gpschrono">GPS Chrono</a></li>
+                    <li id="logsel" class="arrow"><a href="#log">Log</a></li>
+                    <li class="arrow"><a href="#settings">Check List</a></li>
+                    <li class="arrow"><a href="#privacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div id="gpschrono">
+                <div class="toolbar">
+                    <h1>GPS Chrono</h1>
+                    <a class="back" href="#home">Home</a>
+                </div>
+                <div class="info">
+                    <p style="text-align:right; margin-top:0;margin-bottom:0;"><span class="heading">GPS</span><span class="value" id="duration">0:00:00</span></p>
+                    <h2 style="text-align:center;font-size:32px;" id="time">0:00:00</h2>
+                </div>  
+                <div>
+                    <!-- http://s3.amazonaws.com/images.johntopley.com/iphone_table.png -->
+                    <!-- -webkit-column-width: 13em; -webkit-column-gap: 1em; -->
+                    <ul class="individual">
+                        <li>
+                            <span id="distance" class="scalar">0.00</span><span id="distUnit" class="unit">mi</span>
+                        </li>
+                        <li>
+                            <span id="pace" class="scalar">0:00</span><span id="paceUnit" class="unit">min/mi</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="heading">Latitude</span><span class="value" id="latitude">-</span></li>
+                        <li><span class="heading">Longitude</span><span class="value" id="longitude">-</span></li>
+                        <li><span class="heading">Accuracy (meters)</span><span class="value" id="accuracy">-</span></li>
+                    </ul>
+					<button id="btnAction" class="chronoButton">Acquire GPS</button>
+                </div>
+            </div>
+            <div id= "log">
+                <div class="toolbar">
+                   <h1>Log</h1>
+                   <a class="back" href="#home" id="logexit">Home</a>
+                </div>
+                <ul class="edgetoedge" id="ullog">
+                </ul>
+            </div>
+            <div class="floaty">
+                <ul class="individual">
+                    <li><a href="#log" id="btnDel">Delete</a></li>
+                    <li><a href="#log" id="btnUpload">Upload</a></li>
+                </ul>
+            </div>
+            <div id="settings">
+                <div class="toolbar">
+                    <h1>Check List</h1>
+                    <a class="back" href="#home">Home</a>
+                </div>
+				<div class="info">
+                    <h2>iPhone 3G Runners</h2>
+                    <ul>
+                        <li>Turn on Location Services</li>
+                        <li>Set Auto-Lock to Never</li>
+                        <li>Turn off Passcode Lock</li>
+                        <li>Turn off WI-FI Networks</li>
+                        <li>Enjoy Your Run</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="privacy">
+                <div class="toolbar">
+                    <h1>Privacy</h1>
+                    <a class="back" href="#home">Home</a>
+                </div>
+                <div class="info">
+                    <ul>
+                        <li>h5Run stores your runs' GPS data in your browser.</li>
+						<li>Only you have access to your GPS data.</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="about">
+                <div class="toolbar">
+                    <h1>About</h1>
+                    <a class="button back" href="#home">Back</a>
+                </div>
+                <div class="info">
+                    <h2>h5Run</h2>
+                    <p>Beta 20101129</p>
+                    <p>Art Kho</p>
+                    <p>(c) 2010</p>
+                    <p>beijingbayou@gmail.com</p>
+                    <br/>
+                    <p style="text-align:justify">h5Run is a web application that tracks runs using GPS. It stores GPS data of runs in the browser's database. The data can be viewed even if the phone is not connected to the internet. These two features are made possible by the use of HTML5's browser database storage and application cache. h5Run was originally written for iPhone Safari but has been tested on an Android 2.2 phone.</p>
+                </div>
+            </div>
+            <div id="run">
+                <div class="toolbar">
+                    <h1 id="rundate">Splits</h1>
+                    <a href="#" class="back">Back</a>
+                    <a class="button rightButton flip" href="#map" id="btnMap">Map</a>
+                </div>
+                <div class="info">
+                    <h3 id="runDetailsId"></h3>
+                </div>
+                
+                <div id="splits">
+                </div> 
+            </div>
+            <div id="map">
+                <div class="toolbar">
+                    <h1>Map</h1>
+                    <a class="button back" href="#" id="mapBack">Back</a>
+                </div>
+                <div id="map_canvas">
+                </div>
+            </div>
+        </div>
+        <script src="js/artxgj.h5run.jqUI.js">
+        </script>
+    </body>
+</html>
