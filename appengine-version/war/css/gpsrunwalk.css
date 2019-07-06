@@ -1,0 +1,85 @@
+/* Portrait and Landscape "hack" from thecssninja.com */
+/* Portrait */
+@media screen and (max-width: 320px)
+{
+	span: { display: inline; }
+}
+/* Landscape */
+@media screen and (min-width: 321px)
+{
+	span: { display: inline; }
+}
+
+body {
+    background-color : #F5FDA9;
+    font-family : Verdana,Arial;
+    text-align : center;
+    border: 1px solid orange;
+}
+
+#title {
+    font-size: 1.25em;
+    font-weight: bold
+}
+
+#time {
+    text-align: center;
+    font-size: 3em;
+    padding : 0.15em;
+}
+
+.runstatvalue {
+    font-size: 1.75em;
+    padding: 5px;
+}
+
+.runstatunit {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.runstatheading {
+    font-size : 0.8em;
+    font-weight: bold;
+    vertical-align: super;
+}
+
+#duration {
+    font-size: 1.5em;
+    padding: 0.15em;
+}
+
+.geolocheading {
+    font-size : 0.75em;
+    font-weight: bold;
+    vertical-align: super;
+}
+
+.geolocvalue {
+    font-size: 0.85em;
+    padding: 5px;
+    vertical-align: bottom;
+}
+
+.geolocunit {
+    font-size: 0.70em;
+    font-weight: bold;
+}
+
+
+#spacer {
+    width: 100%;
+    padding: 1%;
+    height: 2%;
+    clear: both;
+}
+
+
+table {
+    margin: auto
+}
+
+.button {
+    font-size : 1.1em;
+    font-weight:bold;
+}

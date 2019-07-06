@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title>Beijing Bayou Mapped Runs</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta name="description" content="mapped runs and split times" />
+        <meta name="keywords" content="google maps api version 3, w3c geolocation,iphone, jQuery, map, running, polyline" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="css/cloudtab.css" title="modified andreas09" media="screen,projection" />
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="js/lgpl.js"></script>
+        <script src="js/crockford.js"></script>
+        <script src="js/artxgj.ext.js"></script>
+        <script src="js/artxgj.maps.js"></script>
+        <script src="js/artxgj.gps.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/modelSplits.js"></script>
+        <script src="js/displayGeoSplitsTable.js"></script>
+        <script src="js/displayRunSplitsTable.js"></script>
+        <script src="js/drawRunPathGoogle.js"></script>
+        <script src="js/drawSplitMarker.js"></script>
+
+        <style type="text/css">
+            #container{background:#f0f0f0 url(images/bodybg-purple.jpg) repeat-x;}
+            #mainmenu a:hover{background:#f0f0f0 url(images/menuhover-purple.jpg) top left repeat-x;}
+            #mainmenu a.current{background:#f0f0f0 url(images/menuhover-purple.jpg) top left repeat-x;}
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="sitename">
+                <h1>Cloud Tabularium</h1>
+                <h2>Runs</h2>
+            </div>
+            <div id="mainmenu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="iphonerun.html">Run Tracker</a></li>
+                    <li><a class="current">Mapped Runs</a></li>
+                    <li><a href="polylineart.html">Polyline Art</a></li>
+                    <li><a href="tangrenjie.html">Chinatown Gates</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+
+            <div id="wrap">
+                <div id="rightside">
+                    <h2>Maps and Split Times</h2>
+                    <div  id="runsSelectionList"></div>
+                    <h2>Links</h2>
+                    <ul class="linklist">
+                        <li><a href="gpsrunwalk.html">My iPhone Run/Walk Tracker</a></li>
+                    </ul>
+                    <div id="error"></div>
+                </div>
+
+                <div id="contentalt">
+                    <h2 id="runmap_title">
+                        iPhone-recorded Training Runs for 2009 Big Sur Half Marathon</h2>
+                    <h3><span id="rundate"></span>:&nbsp;
+                        <span id="rungroup"></span></h3>
+                    <div id="map_canvas"
+                         style="border:1px solid orange; 
+                                float: left; 
+                                height:330px;
+                                width:68%;">
+                    </div>
+                    <div id="runSplits"
+                         style="float: right; width:30%;" >
+                    </div>
+
+                    <div class="clear">&nbsp;</div>
+                    <h3>GPS Data</h3>
+                    <div id="splitsTable" 
+                         style="width:100%;">
+                    </div>
+                    <div class="clear">&nbsp;</div>
+                </div>
+                <div class="clearingdiv"></div>
+            </div>
+        </div>
+        <script>
+            var model;
+            var runsList = [];
+            var watchId;
+
+            createRunsList(runsList);
+
+
+            function displayMapSplits(run) {
+                var geolocation;
+                var geoOptions;
+                var gpsSplitsTable;
+                var map;
+                var posOpts;
+                var runPath;
+                var runSplitsTable;
+                var splitMarker;
+
+                $('#rundate').html("<b>" + run.date + "</b>");
+                $('#rungroup').html(run.group);
+                model = artxgj.modelSplits({splitLength : 1, unit : 'mi'});
+                model.addFilter(artxgj.gps.filterAccuracy(150));
+                model.addFilter(artxgj.gps.filterSpeed(10.5));
+
+
+                map = artxgj.maps.adaptedGoogleMapDefault(
+                                {  mapDivName      : 'map_canvas',
+                                   centerLatitude  : 37.805745,
+                                   centerLongitude : -122.447911,
+                                   mapTypeId       : google.maps.MapTypeId.TERRAIN,
+                                   zoom            : 13 } );
+
+                runPath = artxgj.drawRunPathGoogle({map:map});
+                gpsSplitsTable = artxgj.displayGeoSplitsTable('splitsTable');
+                runSplitsTable = artxgj.displayRunSplitsTable('runSplits');
+                splitMarker = artxgj.drawSplitMarker({map:map, color:'FF8C00'});
+
+                model.addListener(runPath.update);
+                model.addListener(runSplitsTable.update);
+                model.addListener(gpsSplitsTable.update);
+                model.addListener(splitMarker.update);
+
+                posOpts = artxgj.gps.PositionOptions();
+                posOpts.resource.completionCallBack = model.completed;
+                posOpts.resource.url = run.url;
+
+                geolocation = artxgj.gps.geolocationFactory.createGeolocation(
+                                artxgj.gps.geolocationFactory.GEOSOURCE.url);
+
+
+                watchId = geolocation.watchPosition(onReceiveGPS,
+                                                    onGPSError,
+                                                    posOpts);
+            }
+
+
+            function createRunsList(runsList) {
+                $.get("data/bigsur.2009.halfm.training.xml", function(data) {
+                    var run, xml;
+                    var runtextlist = [];
+
+                    if (typeof data === "string") {
+                        $('body').append("training data returned is string-type");
+                        xml = new ActiveXObject("Microsoft.XMLDOM");
+                        xml.async = false;
+                        xml.loadXML(data);
+                    } else {
+                        xml = data;
+                    }
+
+                    $('run', xml).each(function(i) {
+                        run = {};  
+                        run.name = $(this).find('name').text().trim();
+                        run.distance = $(this).find('distance').text().trim();
+                        run.group = $(this).find('group').text().trim();
+                        run.date = $(this).find('date').text().trim();
+                        run.url = $(this).find('url').text().trim();
+
+                        runsList.push(run);
+                        runtextlist.push('<li id="run'
+                                            + i + '" class="li_run">' + run.date
+                                            + '</li>');
+                    });
+
+                    $('#runsSelectionList').append("<ul class='runslist'>" +
+                                                    runtextlist.join('')
+                                                    + "</ul>");
+                    // add li click handler
+                    $(function(){
+                        $('.li_run').click(function(event){
+                        
+                            if (event.target.tagName !='LI') {
+                                return true;
+                            }
+
+                            displayMapSplits(runsList[this.id.match(/\d+/)]);
+
+                        });
+                    });
+
+                    // display first map
+                    displayMapSplits(runsList[0]);
+                });
+            }
+
+
+            function onReceiveGPS(position) {
+                var rc = model.update(position);
+            }
+
+
+            function onGPSError(error) {
+                $('#error').html("<b>Error: </b>" + error.code +
+                                    "==>" + error.message);
+            }
+
+
+
+        </script>
+
+        <div id="footer">
+            <p>&copy; 2009 <a href="#">Cloud Tabularium</a> | Original CSS design by <a href="http://andreasviklund.com/">Andreas Viklund</a></p>
+        </div>
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-8399123-1");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
+    </body>
+</html>

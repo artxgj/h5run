@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Cloudtabularium</servlet-name>
+		<servlet-class>com.artxgj.cloudtabularium.CloudtabulariumServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Cloudtabularium</servlet-name>
+		<url-pattern>/cloudtabularium</url-pattern>
+	</servlet-mapping>
+    <servlet>
+        <servlet-name>runs</servlet-name>
+        <servlet-class>com.artxgj.cloudtabularium.RunsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>rungeolist</servlet-name>
+        <servlet-class>com.artxgj.cloudtabularium.RunGeoListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>rungeo</servlet-name>
+        <servlet-class>com.artxgj.cloudtabularium.RunGeoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>delruns</servlet-name>
+        <servlet-class>com.artxgj.cloudtabularium.DelRunGeoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>runs</servlet-name>
+        <url-pattern>/runs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>rungeo</servlet-name>
+        <url-pattern>/rungeo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>rungeolist</servlet-name>
+        <url-pattern>/rungeolist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>delruns</servlet-name>
+        <url-pattern>/delruns</url-pattern>
+    </servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

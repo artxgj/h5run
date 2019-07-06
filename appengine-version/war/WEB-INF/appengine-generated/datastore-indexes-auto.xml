@@ -1,0 +1,16 @@
+<!-- Indices written at Wed, 20 Jan 2010 13:05:00 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="RunWorkout" ancestor="false" source="auto">
+        <property name="owner" direction="asc"/>
+        <property name="startTime" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="RunGeolocation" ancestor="true" source="auto">
+        <property name="duration" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

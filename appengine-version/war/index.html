@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Cloudtablularium App Engine</title>
+        <meta name="description" content="mapped runs and split times" />
+        <meta name="keywords" content="google maps api version 3, w3c geolocation,iphone,google app engine, cloud computing, jQuery, jqGrid, map, running, polyline" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="css/cloudtab.css" title="modified andreas09" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/ui-lightness/jquery-ui-1.7.2.custom.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" />
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="js/crockford.js"></script>
+        <script src="js/artxgj.ext.js"></script>
+        <script src="js/artxgj.gps.js"></script>
+        <script src="js/jquery-1.3.2.min.js"></script>
+        <script src="js/grid.locale-en.js"></script>
+        <script src="js/jquery.jqGrid.min.js"></script>
+  </head>
+
+        <div id="header">
+            <h1>Cloud Tabularium</h1>
+        </div>
+
+        <div id="navbar" class="clearfix">
+            <ul>
+                <li><a class="current" href="index.html">Home</a></li>
+                <li><a href="runlog.jsp">Run Stats & Maps</a></li>
+            </ul>
+        </div>
+
+    
+        <div id="container">
+            <div id="wrap">
+                <div id="rightside">
+                <h2>Site Email</h2>
+                <ul class ="linklist">
+                    <li><a href="mailto:beijingbayou@gmail.com">beijingbayou@gmail.com</a></li>
+                </ul>
+
+                <h2>Links:</h2>
+                <ul class="linklist">
+                    <li><a href="http://www.beijingbayou.com">Beijing Bayou</a></li>
+                    <li><a href="http://code.google.com/appengine/">Google App Engine</a></li>
+                    <li><a href="http://code.google.com/apis/maps/documentation/v3/">Google Maps V3 API</a></li>
+                    <li><a href="http://www.svennerberg.com/2009/06/google-maps-api-3-the-basics/">Basics of Google Maps V3 API</a></li>
+                    <li><a href="http://dev.w3.org/geo/api/spec-source.html">W3C Geolocation API Specification</a></li>
+                    <li><a href="http://groups.google.com/group/google-chart-api/web/chart-types-for-map-pins">Google Chart API for Map Pins</a></li>
+                    <li><a href="http://en.wikipedia.org/wiki/Vincenty%27s_formulae">Vincenty's Formulae</a></li>
+                    <li><a href="http://www.movable-type.co.uk/scripts/latlong-vincenty.html">Chris Veness' Vincenty Implementation</a></li>
+                    <li><a href="http://jquery.com/">jQuery</a></li>
+                    <li><a href="http://www.trirand.com/blog/">jQuery Grid Plugin</a></li>
+                    <li><a href="http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742/ref=sr_1_1?ie=UTF8&s=books&qid=1262170671&sr=8-1">
+                        JavaScript: The Good Parts</a></li>
+
+                </ul>
+                </div>
+
+                <div id="contentalt">
+                    <p class="intro">
+                        According to wikipedia, the <a href="http://en.wikipedia.org/wiki/Tabularium">Tabularium</a> was the official records office of ancient Rome. 
+                Hi! My name's Art. Cloud Tabularium is a place for me to learn about developing prototype applications that store records in the Google cloud.
+                	</p>
+                	<p>
+               		My first application is an iPhone 3G web application that records the time and distance of runs or walks using GPS. This is accomplished through using iPhone 
+               		Safari's W3C Geolocation API. The GPS data are stored in real-time in a Google App Engine datastore and used by the "Run Stats & Maps" to generate 
+               		a map of the course and the split times. To the right is an image of a recorded run.<img class="floatRight"src="images/statsmaps.png" /> I am using the 
+               		iPhone run recorder to help me keep track of my long runs and training for a marathon.
+                	</p>
+                    <p>
+                    iPhone-runners and walkers are very welcome to try my <a href="recordrun.jsp">run recorder</a> prototype. In theory, the run recorder should work in any browser that 
+                    supports the W3C Geolocation API. I haven't had time to search the web for mobile browsers that support this API. Both run recorder and "Run Maps & Stats" rely on Google to authenticate its users. As such anyone who wants to 
+                    try these programs must have a gmail account. At the moment, there is no sharing capability. Therefore users of this program can only see their own run data. Feedback is very much welcomed, please send them to beijingbayou email 
+                    address listed above.
+                    <p>
+                    An explanation of the code that generates the maps is available at my <a href="www.beijingbayou.com">Beijing Bayou website</a>.
+                    </p>
+                    <h3>Caveats</h3>
+                    <p>
+                    Using the iPhone's GPS will drain the iPhone's battery life. The longest I've been able record my run is a little over 2 hours; the battery 
+                    was fully drained. Aside from this issue, the precision of the GPS distance calculations is 
+                    dependent on the qualiy of the iPhone's cell reception.
+                    </p>
+                    <h3>Checklist</h3>
+                    <p>
+                    Make sure these iPhone settings are configured before using the run recorder:
+                        <ul>
+                           <li>Location Services is on.</li>
+                           <li>Auto-Lock is Never</li>
+                           <li>Passcode Lock is Off</li>
+               	       </ul>
+                    Happy Running! :)
+                    </p>
+                </div>
+                <div class="clearingdiv">&nbsp;</div>
+                <div class="clearingdiv">&nbsp;</div>
+		</div>
+                
+
+    </body>
+</html>
