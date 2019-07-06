@@ -12,5 +12,5 @@ For a month in 2010, the app was tested using 3 different devices on three diffe
 2. A Motorola Android phone on Verizon Wireless.
 3. An Evo Android phone on Sprint.
 
-Google I/O 2010's partners gave away the android phones for free and provided a month's free of wireless service.
+Google I/O 2010's partners gave away the android phones for free and provided a month of free wireless service.
 
