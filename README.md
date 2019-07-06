@@ -1,11 +1,11 @@
 # h5run
 My 2010 HTML5/JS webapp for tracking my training runs. It was also my first Javascript app.
 
-The app was first written in 2009 as Geolocation recorder. It went through several iterations of changes:
+The app was first written in 2009 as Geolocation recorder. It went through several iterations of changes. Some of them were:
 
 1. Adding Google Maps API to show maps of the routes ran.
 2. Storing the real-time geolocation data in Google App Engine. I gave a [presentation](https://www.meetup.com/sviphone/events/12372267/) about this feature in 2010. 
-3. To prolong the battery life of the phone, so I can run more than 2 hours, I replaced the Google App Engine feature with the mobile browser's SQLite.
+3. Replaceing the Google App Engine feature with the mobile browser's SQLite; this slowed down the battery-drain of the phone.
 
 For a month in 2010, the app was tested using 3 different devices on three different cellular networks:
 1. iPhone 3G on AT&T.
